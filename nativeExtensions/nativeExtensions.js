@@ -1,3 +1,11 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 Array.prototype.clone = function () {
     return this.slice(0);
 };
@@ -93,20 +101,12 @@ Array.prototype.min = function (fun) {
     });
     return min;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments)).next());
-    });
-};
 var nativeExtensions;
 (function (nativeExtensions) {
     "use strict";
     class HttpClient {
         constructor() {
-            this.requestHeader = {};
+            this.requestHeader = null;
             this.withCredentials = false;
         }
         openAndSend(method, url, header, data, user, password, progressCallback) {
@@ -133,6 +133,7 @@ var nativeExtensions;
                         }
                     };
                     //#endregion
+                    xhr.open(method, url, true, user || this.user, password || this.password);
                     //#region 設定Header
                     if (this.requestHeader)
                         for (var key in this.requestHeader)
@@ -141,7 +142,6 @@ var nativeExtensions;
                         for (var key in header)
                             xhr.setRequestHeader(key, header[key]);
                     //#endregion
-                    xhr.open(method, url, true, user || this.user, password || this.password);
                     if (data) {
                         if (data instanceof FormData || typeOf(data) == 'String') {
                             xhr.send(data);

@@ -1,7 +1,7 @@
 ﻿module nativeExtensions{
     "use strict";
     export class HttpClient {
-        public requestHeader: any = {};
+        public requestHeader: any = null;
         public withCredentials: boolean = false;
         public progressCallback: (event: ProgressEvent) => any;
 
@@ -30,12 +30,12 @@
                 };
                 //#endregion
 
+                xhr.open(method, url, true, user || this.user, password || this.password);
+
                 //#region 設定Header
                 if (this.requestHeader) for (var key in this.requestHeader) xhr.setRequestHeader(key, this.requestHeader[key]);
                 if (header) for (var key in header) xhr.setRequestHeader(key, header[key]);
                 //#endregion
-
-                xhr.open(method, url, true, user || this.user, password || this.password);
 
                 if (data) {
                     if (data instanceof FormData || typeOf(data) == 'String') {

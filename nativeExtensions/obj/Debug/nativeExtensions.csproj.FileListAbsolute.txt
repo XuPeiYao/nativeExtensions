@@ -1,0 +1,5 @@
+D:\nativeExtensions\nativeExtensions\bin\nativeExtensions.dll
+D:\nativeExtensions\nativeExtensions\bin\nativeExtensions.pdb
+D:\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.csprojResolveAssemblyReference.cache
+D:\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.dll
+D:\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.pdb
