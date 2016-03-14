@@ -1,11 +1,3 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments)).next());
-    });
-};
 Array.prototype.clone = function () {
     return this.slice(0);
 };
@@ -101,6 +93,14 @@ Array.prototype.min = function (fun) {
     });
     return min;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 var nativeExtensions;
 (function (nativeExtensions) {
     "use strict";
@@ -125,6 +125,7 @@ var nativeExtensions;
                             result.statusCode = xhr.status;
                             result.resultType = xhr.responseType;
                             result.resultText = xhr.responseText;
+                            result.resultXML = xhr.responseXML;
                             result.result = xhr.response;
                             resolve(result);
                         }
@@ -185,6 +186,48 @@ var nativeExtensions;
     }
     nativeExtensions.HttpResponse = HttpResponse;
 })(nativeExtensions || (nativeExtensions = {}));
+var HttpClient = nativeExtensions.HttpClient;
+function include() {
+    return __awaiter(this, void 0, Promise, function* () {
+        return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                var includeTags = document.getElementsByTagName("include")
+                    .toArray()
+                    .filter(x => x.getAttribute("isComplete") != null);
+                if (includeTags.length == 0) {
+                    resolve();
+                    return;
+                }
+                includeTags.forEach((includeTag) => __awaiter(this, void 0, void 0, function* () {
+                    includeTag.setAttribute("id", Math.uuid());
+                    var fileSrc = includeTag.getAttribute("src");
+                    if (!fileSrc)
+                        return;
+                    var client = new HttpClient();
+                    var response = yield client.getAsync(fileSrc);
+                    parseHTML(response.result).body.childNodes.toArray().forEach((x) => {
+                        includeTag.parentNode.insertBefore(x, includeTag);
+                    });
+                    includeTag.parentNode.removeChild(includeTag);
+                }));
+                yield include(); //Deep
+            }
+            catch (e) {
+                reject(e);
+            }
+            resolve();
+        }));
+    });
+}
+Math.uuid = function () {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+        s4() + '-' + s4() + s4() + s4();
+};
 NodeList.prototype.toArray = function () {
     var result = new Array();
     for (var i = 0; i < this.length; i++)
@@ -209,6 +252,16 @@ Object.prototype.containsKey = function (key) {
 Object.prototype.containsValue = function (value) {
     return this.getValues().contains(value);
 };
+Object.prototype.toArray = function () {
+    if (this.length > 0) {
+        var result = new Array();
+        for (var i = 0; i < this.length; i++) {
+            result.push(this[i]);
+        }
+        return result;
+    }
+    return [];
+};
 function parseHTML(htmlString) {
     return new DOMParser().parseFromString(htmlString, "text/html");
 }
@@ -216,7 +269,7 @@ function parseXML(xmlString) {
     return new DOMParser().parseFromString(xmlString, "text/xml");
 }
 function parseNode(nodeString) {
-    return new DOMParser().parseFromString(nodeString, "text/html").childNodes[0];
+    return new DOMParser().parseFromString(nodeString, "text/html").body.childNodes[0];
 }
 function typeOf(obj) {
     if (!obj)

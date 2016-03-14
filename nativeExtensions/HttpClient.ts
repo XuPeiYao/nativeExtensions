@@ -1,4 +1,4 @@
-﻿module nativeExtensions{
+﻿module nativeExtensions {
     "use strict";
     export class HttpClient {
         public requestHeader: any = null;
@@ -22,6 +22,7 @@
                         result.statusCode = xhr.status;
                         result.resultType = xhr.responseType;
                         result.resultText = xhr.responseText;
+                        result.resultXML = xhr.responseXML;
                         result.result = xhr.response;
                         resolve(result);
                     } else {
@@ -68,6 +69,8 @@
         public header: any;
         public resultType: string;
         public resultText: string;
+        public resultXML: Document;
         public result: any;
     }
 }
+var HttpClient = nativeExtensions.HttpClient;

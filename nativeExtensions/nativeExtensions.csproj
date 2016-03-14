@@ -24,6 +24,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="Array.ts" />
     <TypeScriptCompile Include="HttpClient.ts" />
+    <TypeScriptCompile Include="Include.ts" />
+    <TypeScriptCompile Include="Math.ts" />
     <TypeScriptCompile Include="NodeList.ts" />
     <TypeScriptCompile Include="Object.ts" />
     <TypeScriptCompile Include="Parse.ts" />

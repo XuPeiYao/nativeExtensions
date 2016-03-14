@@ -1,9 +1,9 @@
 ﻿interface NodeList {
-    toArray(): Array<Node>;
+    toArray<T>(): Array<T>;
 }
 
-NodeList.prototype.toArray = function (): Array<Node> {
-    var result = new Array<Node>();
+NodeList.prototype.toArray = function<T>(): Array<T> {
+    var result = new Array<T>();
     for (var i = 0; i < this.length; i++)result.push(this[i]);
     return result;
 }

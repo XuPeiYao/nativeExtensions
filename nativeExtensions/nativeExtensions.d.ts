@@ -36,17 +36,24 @@ declare module nativeExtensions {
         header: any;
         resultType: string;
         resultText: string;
+        resultXML: Document;
         result: any;
     }
 }
+declare var HttpClient: typeof nativeExtensions.HttpClient;
+declare function include(): Promise<void>;
+interface Math {
+    uuid(): string;
+}
 interface NodeList {
-    toArray(): Array<Node>;
+    toArray<T>(): Array<T>;
 }
 interface Object {
     getKeys(): Array<any>;
     getValues(): Array<any>;
     containsKey(key: any): boolean;
     containsValue(value: any): boolean;
+    toArray(): Array<any>;
 }
 declare function parseHTML(htmlString: string): HTMLDocument;
 declare function parseXML(xmlString: string): HTMLDocument;

@@ -3,6 +3,7 @@
     getValues(): Array<any>;
     containsKey(key: any): boolean;
     containsValue(value: any): boolean;
+    toArray(): Array<any>;
 }
 
 Object.prototype.getKeys = function () {
@@ -20,4 +21,14 @@ Object.prototype.containsKey = function (key: any) {
 }
 Object.prototype.containsValue = function (value: any) {
     return this.getValues().contains(value);
+}
+Object.prototype.toArray = function () {
+    if (this.length > 0) {
+        var result = new Array<any>();
+        for (var i = 0; i < this.length; i++) {
+            result.push(this[i]);
+        }
+        return result;
+    }
+    return [];
 }
