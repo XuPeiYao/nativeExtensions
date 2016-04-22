@@ -1,3 +1,11 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments)).next());
+    });
+};
 Array.prototype.clone = function () {
     return this.slice(0);
 };
@@ -93,14 +101,6 @@ Array.prototype.min = function (fun) {
     });
     return min;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator.throw(value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments)).next());
-    });
-};
 var nativeExtensions;
 (function (nativeExtensions) {
     "use strict";
@@ -148,10 +148,18 @@ var nativeExtensions;
                             xhr.send(data);
                         }
                         else {
-                            var params = new Array();
-                            for (var key in data)
-                                params.push(`${key}=${encodeURIComponent(data[key])}`);
-                            xhr.send(params.join("&"));
+                            if (method == "GET" || method == "DELETE") {
+                                var params = new Array();
+                                for (var key in data)
+                                    params.push(`${key}=${encodeURIComponent(data[key])}`);
+                                xhr.send(params.join("&"));
+                            }
+                            else {
+                                var formdata = new FormData();
+                                for (var key in data)
+                                    formdata.append(key, data[key]);
+                                xhr.send(formdata);
+                            }
                         }
                     }
                     else {

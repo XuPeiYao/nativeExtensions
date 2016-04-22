@@ -42,9 +42,15 @@
                     if (data instanceof FormData || typeOf(data) == 'String') {
                         xhr.send(data);
                     } else {
-                        var params = new Array<string>();
-                        for (var key in data) params.push(`${key}=${encodeURIComponent(data[key])}`);
-                        xhr.send(params.join("&"));
+                        if (method == "GET" || method == "DELETE") {
+                            var params = new Array<string>();
+                            for (var key in data) params.push(`${key}=${encodeURIComponent(data[key])}`);
+                            xhr.send(params.join("&"));
+                        } else {
+                            var formdata: FormData = new FormData();
+                            for (var key in data) formdata.append(key, data[key]);
+                            xhr.send(formdata);
+                        }
                     }
                 } else {
                     xhr.send();
