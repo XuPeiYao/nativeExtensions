@@ -48,7 +48,10 @@
                             xhr.send(params.join("&"));
                         } else {
                             var formdata: FormData = new FormData();
-                            for (var key in data) formdata.append(key, data[key]);
+                            for (var key in data) {
+                                if (data[key] instanceof Function) continue;
+                                formdata.append(key, data[key]);
+                            }
                             xhr.send(formdata);
                         }
                     }
