@@ -1,28 +1,53 @@
-﻿async function include(): Promise<void> {
+﻿async function includeAsync(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
         try {
             var includeTags = document.getElementsByTagName("include")
-                .toArray<Element>()
-                .filter(x => x.getAttribute("isComplete") != null);
+                .toArray<Element>();
             if (includeTags.length == 0) {
                 resolve();
                 return;
             }
-            includeTags.forEach(async (includeTag) => {//BFS
+
+            for (var i = 0; i < includeTags.length; i++) {
+                var includeTag = includeTags[i];
                 includeTag.setAttribute("id", Math.uuid());
                 var fileSrc = includeTag.getAttribute("src");
-                if (!fileSrc)return;
+                if (!fileSrc) continue;
                 var client = new HttpClient();
                 var response = await client.getAsync(fileSrc);
                 parseHTML((<string>response.result)).body.childNodes.toArray().forEach((x: Node) => {
                     includeTag.parentNode.insertBefore(x, includeTag);
                 });
+                console.info("include " + fileSrc);
                 includeTag.parentNode.removeChild(includeTag);
-            });
+            }
             await include();//Deep
         } catch (e) {
             reject(e);
         }
         resolve();
     });
+}
+function include(): void {
+    var includeTags = document.getElementsByTagName("include")
+        .toArray<Element>();
+    if (includeTags.length == 0) {
+        return;
+    }
+    
+    for (var i = 0; i < includeTags.length; i++) {
+        var includeTag = includeTags[i];
+        includeTag.setAttribute("id", Math.uuid());
+        var fileSrc = includeTag.getAttribute("src");
+        if (!fileSrc) continue;
+        var client = new XMLHttpRequest(); //請求用物件
+        client.open('GET', fileSrc, false);
+        client.send();
+        parseHTML((<string>client.response)).body.childNodes.toArray().forEach((x: Node) => {
+            includeTag.parentNode.insertBefore(x, includeTag);
+        });
+        console.info("include " + fileSrc);
+        includeTag.parentNode.removeChild(includeTag);
+    }
+    include();//Deep
 }
