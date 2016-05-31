@@ -1,4 +1,5 @@
-﻿interface Object {
+﻿/*
+interface Object {
     getKeys(): Array<any>;
     getValues(): Array<any>;
     containsKey(key: any): boolean;
@@ -31,4 +32,10 @@ Object.prototype.toArray = function () {
         return result;
     }
     return [];
+}*/
+
+var getKeys = function (obj) {
+    var result = new Array<any>();
+    for (var key in obj) result.push(key);
+    return result;
 }

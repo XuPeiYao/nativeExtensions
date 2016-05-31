@@ -1,8 +1,12 @@
 ﻿async function includeAsync(): Promise<void> {
     return new Promise<void>(async (resolve, reject) => {
         try {
-            var includeTags = document.getElementsByTagName("include")
-                .toArray<Element>();
+            var includeTags = [];
+            var temp = document.getElementsByTagName("include");
+            for (var i = 0; i < temp.length; i++) {
+                includeTags.push(temp[i]);
+            }
+
             if (includeTags.length == 0) {
                 resolve();
                 return;
@@ -29,8 +33,12 @@
     });
 }
 function include(): void {
-    var includeTags = document.getElementsByTagName("include")
-        .toArray<Element>();
+    var includeTags = [];
+    var temp = document.getElementsByTagName("include");
+    for (var i = 0; i < temp.length; i++) {
+        includeTags.push(temp[i]);
+    }
+
     if (includeTags.length == 0) {
         return;
     }
