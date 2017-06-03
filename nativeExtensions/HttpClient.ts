@@ -46,13 +46,17 @@
                             var params = new Array<string>();
                             for (var key in data) params.push(`${key}=${encodeURIComponent(data[key])}`);
                             xhr.send(params.join("&"));
-                        } else {
+                        } else if (!(new FormData()['fake'])) {
                             var formdata: FormData = new FormData();
                             for (var key in data) {
                                 if (data[key] instanceof Function) continue;
                                 formdata.append(key, data[key]);
                             }
                             xhr.send(formdata);
+                        } else {
+                            var params = new Array<string>();
+                            for (var key in data) params.push(`${key}=${encodeURIComponent(data[key])}`);
+                            xhr.send(params.join("&"));
                         }
                     }
                 } else {

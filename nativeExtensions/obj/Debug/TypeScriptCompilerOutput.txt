@@ -1,0 +1,15 @@
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js.map
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.d.ts
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js.map
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.d.ts
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js.map
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.d.ts
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js.map
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.d.ts
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.js.map
+D:\Projects\nativeExtensions\nativeExtensions\dist\nativeExtensions.d.ts

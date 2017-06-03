@@ -53,4 +53,31 @@ declare var getKeys: (obj: any) => any[];
 declare function parseHTML(htmlString: string): HTMLDocument;
 declare function parseXML(xmlString: string): HTMLDocument;
 declare function parseNode(nodeString: string): Node;
+interface String {
+    innerString(start: string, end: string): string;
+}
 declare function typeOf(obj: any): string;
+declare enum Browser {
+    MSIE = 0,
+    Opera = 1,
+    Firefox = 2,
+    Edge = 3,
+    Safari = 4,
+    Chrome = 5,
+    Blink = 6,
+    Unknow = 7,
+}
+interface Window {
+    browser: Browser[];
+    opr: any;
+    opera: any;
+    addons: any;
+    HTMLElement: any;
+    StyleMedia: any;
+    chrome: any;
+    CSS: any;
+}
+interface Document {
+    documentMode: any;
+}
+declare var opr: any, InstallTrigger: any, safari: any;
