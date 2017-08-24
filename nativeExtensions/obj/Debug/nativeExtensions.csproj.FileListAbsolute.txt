@@ -8,3 +8,4 @@ D:\Projects\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.dll
 D:\Projects\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.pdb
 D:\Projects\nativeExtensions\nativeExtensions\bin\nativeExtensions.dll
 D:\Projects\nativeExtensions\nativeExtensions\bin\nativeExtensions.pdb
+D:\Projects\nativeExtensions\nativeExtensions\obj\Debug\nativeExtensions.csproj.CoreCompileInputs.cache
