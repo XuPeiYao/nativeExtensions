@@ -42,7 +42,7 @@ function include(): void {
     if (includeTags.length == 0) {
         return;
     }
-    
+
     for (var i = 0; i < includeTags.length; i++) {
         var includeTag = includeTags[i];
         includeTag.setAttribute("id", Math.uuid());
@@ -51,7 +51,7 @@ function include(): void {
         var client = new XMLHttpRequest(); //請求用物件
         client.open('GET', fileSrc, false);
         client.send();
-        parseHTML((<string>client.response)).body.childNodes.toArray().forEach((x: Node) => {
+        parseHTML((<string>client.response || client.responseText)).body.childNodes.toArray().forEach((x: Node) => {
             includeTag.parentNode.insertBefore(x, includeTag);
         });
         console.info("include " + fileSrc);
