@@ -400,12 +400,18 @@ var getKeys = function (obj) {
     return result;
 };
 function parseHTML(htmlString) {
+    if (window.browser.contains(Browser.MSIE)) {
+        return new DOMParser().parseFromString(htmlString, "text/xml").documentElement;
+    }
     return new DOMParser().parseFromString(htmlString, "text/html");
 }
 function parseXML(xmlString) {
     return new DOMParser().parseFromString(xmlString, "text/xml");
 }
 function parseNode(nodeString) {
+    if (window.browser.contains(Browser.MSIE)) {
+        return new DOMParser().parseFromString(nodeString, "text/xml").documentElement;
+    }
     return new DOMParser().parseFromString(nodeString, "text/html").body.childNodes[0];
 }
 String.prototype.innerString = function (start, end) {
