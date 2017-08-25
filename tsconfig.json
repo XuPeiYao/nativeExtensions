@@ -8,6 +8,7 @@
     "target": "es5",
     "lib": [ "dom", "es6" ],
     "outDir": "dist",
+    "module":"system",
     "declaration": true
   },
   "exclude": [
