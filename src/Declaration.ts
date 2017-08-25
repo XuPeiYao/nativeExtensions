@@ -17,7 +17,4 @@ export interface DocumentExtension extends Document {
 export interface MathExtension extends Math {
     uuid(): string;
 }
-export interface NodeListExtension extends NodeList {
-    toArray<T>(): Array<T>;
-}
 export declare var opr, InstallTrigger, safari;
